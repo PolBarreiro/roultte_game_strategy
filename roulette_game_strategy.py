@@ -17,8 +17,8 @@ mon = 5000  # the money you start with
 bw = 0  # the output ball (red or black)
 ap = 1  # the starting bet (one dollar)
 count = 0
-play = 100  # the number of times you want to play
-max = 7  # the number of times you can lose (1$,3$,9$,27$,81$,243$,729$,2187$...)
+play = 100000  # the number of times you want to play
+max = 8  # the number of times you can lose (1$,3$,9$,27$,81$,243$,729$,2187$,6561,19683...)
 
 # you can play with numbers above
 # play many times as you need, results very each time
@@ -29,6 +29,9 @@ for i in range(play):
     count = 0
     print(mon)
     while True:
+        if mon <= 0:
+            print('you loose')
+            exit()
         bw = random.randint(1, 2)
         count = count + 1
         if count < max:
@@ -37,7 +40,7 @@ for i in range(play):
                 ap = 1
                 break
             else:
-                ap = ap + ap * 2  # ***here***
+                ap = ap * 3  # ***here***
         else:
             mon = mon - ap
             ap = 1
